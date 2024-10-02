@@ -26,7 +26,7 @@ function Login({ onLoginSuccess }: LoginProps) {
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
       setUser(userCredential.user);
       console.log("User logged in:", userCredential.user);

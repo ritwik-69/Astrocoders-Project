@@ -24,7 +24,7 @@ function SignUp() {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
       await updateProfile(userCredential.user, { displayName: displayName });
       setUser(userCredential.user);
