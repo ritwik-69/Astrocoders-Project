@@ -1,79 +1,101 @@
-// src/component/SignUp.tsx
-import { useState } from "react";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-  GoogleAuthProvider,
-  signInWithPopup,
-  User,
-} from "firebase/auth";
-import { app } from "../firebaseConfig";
+import { At, GoogleLogo, Password } from "phosphor-react";
+import { Link } from "react-router-dom";
+import { signInWithGoogle, signUp } from "../firebase/authentication";
+import { notify } from "../utils/notify";
+import { FormEvent, useRef } from "react";
 
-function SignUp() {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [displayName, setDisplayName] = useState<string>("");
-  const [user, setUser] = useState<User | null>(null);
+export function SignUp() {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
-  const auth = getAuth(app);
-  const googleProvider = new GoogleAuthProvider();
-
-  const handleSignUp = async () => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password,
-      );
-      await updateProfile(userCredential.user, { displayName: displayName });
-      setUser(userCredential.user);
-      console.log("User signed up:", userCredential.user);
-    } catch (error) {
-      console.error("Error signing up:", error);
+  const loginWithGoogle = async () => {
+    const response = await signInWithGoogle();
+    if (response !== true) {
+      notify("Something went wrong");
     }
   };
 
-  const handleGoogleSignUp = async () => {
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      setUser(result.user);
-      console.log("User signed up with Google:", result.user);
-    } catch (error) {
-      console.error("Error signing up with Google:", error);
+  const createAnAccount = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (emailRef.current && passwordRef.current) {
+      const response = await signUp(
+        emailRef.current.value,
+        passwordRef.current.value,
+      );
+      if (!response) {
+        notify("Something went wrong.");
+      }
     }
   };
 
   return (
-    <div>
-      {user ? (
-        <h2>Welcome {user.displayName || "User"}</h2>
-      ) : (
-        <div>
-          <input
-            type="text"
-            placeholder="Display Name"
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button onClick={handleSignUp}>Sign Up</button>
-          <button onClick={handleGoogleSignUp}>Sign Up with Google</button>
-        </div>
-      )}
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="bg-white md:w-[500px] rounded-xl p-8">
+        <h2 className="mt-20 mb-8 text-3xl font-bold text-center text-gray-800">
+          Create an account
+        </h2>
+        <button
+          onClick={loginWithGoogle}
+          className="rounded-xl relative flex gap-x-4 mb-8 text-black h-11 w-full items-center justify-center px-6 border border-gray-500"
+        >
+          <GoogleLogo className="w-6 h-6" />
+          <span className="relative text-base font-light">with Google</span>
+        </button>
+        <p className="text-center mb-8">Or</p>
+        <form className="space-y-8" onSubmit={createAnAccount}>
+          <div className="space-y-4">
+            <div className="relative flex items-center">
+              <At className="w-6 h-6 absolute left-4 inset-y-0 my-auto" />
+              <input
+                ref={emailRef}
+                type="email"
+                name="email"
+                placeholder="Insert your email"
+                className="focus:outline-none
+                                        block w-full rounded-xl placeholder-gray-500
+                                        bg-gray-100 pl-12 pr-4 h-12 text-gray-600 transition
+                                        duration-300 invalid:ring-2 invalid:ring-red-400
+                                        focus:ring-2 focus:ring-black"
+              />
+            </div>
+          </div>
+          <div className="space-y-4">
+            <div className="relative flex items-center">
+              <Password className="w-6 h-6 absolute left-4 inset-y-0 my-auto" />
+              <input
+                ref={passwordRef}
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Insert your password"
+                className="focus:outline-none block w-full rounded-xl placeholder-gray-500 bg-gray-100 pl-12 pr-4 h-12 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-black"
+              />
+            </div>
+          </div>
+          <button
+            type="submit"
+            className="bg-black rounded-xl relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95"
+          >
+            <span className="relative text-base font-light text-white">
+              Sign Up
+            </span>
+          </button>
+          <div className="border-t border-gray-100 pt-6 text-center text-sm text-gray-500">
+            <p>
+              Can't remember your Password?
+              <Link to="/reset-password" className="text-black">
+                Reset password
+              </Link>
+            </p>
+            <p>
+              Do you have an account?{" "}
+              <Link to="/login" className="text-black">
+                Login
+              </Link>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
-
-export default SignUp;

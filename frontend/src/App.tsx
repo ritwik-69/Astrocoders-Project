@@ -1,36 +1,22 @@
-// src/App.tsx
-import { useState } from "react";
-import SignUp from "./components/SignUp";
-import Login from "./components/Login";
-import Home from "./components/Home";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/Home"; // Import your Home component
+import SignUpPage from "./pages/Sign-up"; // Adjust the import path as necessary
+import UserPage from "./pages/User";
+import LoginPage from "./pages/Login";
+import MFAPage from "./pages/Mfa";
 
-function App() {
-  const [isSignUp, setIsSignUp] = useState<boolean>(true);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-
-  const handleLoginSuccess = () => {
-    setIsLoggedIn(true);
-  };
-
+const App = () => {
   return (
-    <div>
-      {isLoggedIn ? (
-        <Home />
-      ) : (
-        <div>
-          <button onClick={() => setIsSignUp(!isSignUp)}>
-            {isSignUp ? "Switch to Login" : "Switch to Sign Up"}
-          </button>
-
-          {isSignUp ? (
-            <SignUp />
-          ) : (
-            <Login onLoginSuccess={handleLoginSuccess} />
-          )}
-        </div>
-      )}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/user" element={<UserPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/mfa" element={<MFAPage />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

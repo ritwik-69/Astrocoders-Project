@@ -1,7 +1,7 @@
 // component/Home.tsx
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useState, useEffect } from "react";
-import { app } from "../firebaseConfig"; // Import the initialized app
+import { app } from "../firebase/firebaseConfig"; // Import the initialized app
 
 function Home() {
   const auth = getAuth(app); // Use getAuth(app) to initialize the auth instance
