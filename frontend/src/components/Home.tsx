@@ -32,8 +32,17 @@ const App: React.FC = () => {
 
       {/* Main content that grows to fill available space */}
       <main className="flex-grow flex justify-center items-center py-20">
-        <div className="text-center text-white">
-          <h1 className="text-4xl font-bold">Welcome to Your Project</h1>
+        <div className="text-center text-Black max-w-2xl px-4">
+          <h1 className="text-4xl font-black mb-8 uppercase tracking-wide">
+            X-ray Burst Detection & Classification
+          </h1>
+          <p className="text-xl font-semibold leading-relaxed mb-6">
+            Pushing the boundaries of astrophysical research by creating a
+            cutting-edge model to detect, classify, and visualize X-ray bursts. We’re tackling the most extreme cosmic events, from Type I and II bursts to superbursts and solar flares.
+          </p>
+          <p className="text-xl font-medium italic opacity-90">
+            Our mission: To unlock new insights into the universe’s most powerful phenomena.
+          </p>
         </div>
       </main>
     </div>
