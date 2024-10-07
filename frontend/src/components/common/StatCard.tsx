@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 interface StatCardProps {
   name: string;
   icon: any;
-  value: number;
+  value: string;
   color: string;
 }
 
