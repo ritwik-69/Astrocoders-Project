@@ -1,6 +1,10 @@
-import { At, GoogleLogo, Password } from "phosphor-react";
+import { At, GithubLogo, GoogleLogo, Password } from "phosphor-react";
 import { Link } from "react-router-dom";
-import { signInWithGoogle, signUp } from "../firebase/authentication";
+import {
+  signInWithGithub,
+  signInWithGoogle,
+  signUp,
+} from "../firebase/authentication";
 import { notify } from "../utils/notify";
 import { FormEvent, useRef } from "react";
 
@@ -36,10 +40,17 @@ export function SignUp() {
         </h2>
         <button
           onClick={loginWithGoogle}
-          className="rounded-xl flex gap-x-4 mb-8 text-black h-11 w-full items-center justify-center px-6 border border-gray-500"
+          className="rounded-xl flex gap-x-4 mb-4 text-black h-11 w-full items-center justify-center px-6 border border-gray-500"
         >
           <GoogleLogo className="w-6 h-6" />
           <span className="relative text-base font-light">with Google</span>
+        </button>
+        <button
+          onClick={signInWithGithub}
+          className="rounded-xl flex gap-x-4 mb-8 text-black h-11 w-full items-center justify-center px-6 border border-gray-500"
+        >
+          <GithubLogo className="w-6 h-6" />
+          <span className="relative text-base font-light">with GitHub</span>
         </button>
         <p className="text-center mb-8">Or</p>
         <form className="space-y-8" onSubmit={createAnAccount}>
