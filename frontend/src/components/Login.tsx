@@ -1,5 +1,5 @@
 import { FormEvent, useRef } from "react";
-import { At, GoogleLogo, Password,  GithubLogo } from "phosphor-react"; // Add GitHubLogo
+import { At, GoogleLogo, Password, GithubLogo } from "phosphor-react"; // Add GitHubLogo
 import { Link } from "react-router-dom";
 
 type Props = {
@@ -8,7 +8,11 @@ type Props = {
   loginWithEmailAndPassword: (email: string, password: string) => void;
 };
 
-export function Login({ loginWithGoogle, loginWithGithub, loginWithEmailAndPassword }: Props) {
+export function Login({
+  loginWithGoogle,
+  loginWithGithub,
+  loginWithEmailAndPassword,
+}: Props) {
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
 

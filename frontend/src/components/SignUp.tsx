@@ -20,7 +20,7 @@ export function SignUp() {
     if (emailRef.current && passwordRef.current) {
       const response = await signUp(
         emailRef.current.value,
-        passwordRef.current.value
+        passwordRef.current.value,
       );
       if (!response) {
         notify("Something went wrong.");
@@ -76,19 +76,18 @@ export function SignUp() {
               Sign Up
             </span>
           </button>
-            <p className="border-t border-gray-100 pt-6 text-center text-sm text-gray-500">
-              Already have an account?{" "}
-              <Link to="/login" className="text-black">
-                Login
-              </Link>
-            </p>
-            <p className="text-center text-sm text-gray-500 mt-2">
-              Can't remember your Password?{" "}
-              <Link to="/reset-password" className="text-black">
-                Reset password
-              </Link>
-            </p>
-
+          <p className="border-t border-gray-100 pt-6 text-center text-sm text-gray-500">
+            Already have an account?{" "}
+            <Link to="/login" className="text-black">
+              Login
+            </Link>
+          </p>
+          <p className="text-center text-sm text-gray-500 mt-2">
+            Can't remember your Password?{" "}
+            <Link to="/reset-password" className="text-black">
+              Reset password
+            </Link>
+          </p>
         </form>
       </div>
     </div>
