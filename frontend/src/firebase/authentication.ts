@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   getMultiFactorResolver,
+  GithubAuthProvider,
   GoogleAuthProvider,
   multiFactor,
   MultiFactorError,
@@ -11,12 +12,15 @@ import {
   PhoneAuthProvider,
   PhoneMultiFactorGenerator,
   sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signInWithRedirect,
   signOut,
   User,
 } from "firebase/auth";
 import { app } from "./firebaseConfig";
+import { notify } from "../utils/notify";
 
 export const auth: Auth = getAuth(app);
 
@@ -28,10 +32,23 @@ export async function signInWithGoogle(): Promise<any> {
     return e;
   }
 }
+export async function signInWithGithub(): Promise<any> {
+  try {
+    const provider = new GithubAuthProvider();
+
+    provider.addScope("repo");
+    const result = await signInWithPopup(auth, provider);
+    console.log(result.user);
+    return true;
+  } catch (e) {
+    console.log(e);
+    return e;
+  }
+}
 
 export async function signUp(
   email: string,
-  password: string,
+  password: string
 ): Promise<boolean> {
   try {
     await createUserWithEmailAndPassword(auth, email, password);
@@ -69,7 +86,7 @@ export function verifyIfUserIsEnrolled(user: User) {
 export async function verifyPhoneNumber(
   user: User,
   phoneNumber: string,
-  recaptchaVerifier: ApplicationVerifier,
+  recaptchaVerifier: ApplicationVerifier
 ): Promise<false | string> {
   const session = await multiFactor(user).getSession();
   const phoneInfoOptions = {
@@ -81,7 +98,7 @@ export async function verifyPhoneNumber(
   try {
     return await phoneAuthProvider.verifyPhoneNumber(
       phoneInfoOptions,
-      recaptchaVerifier,
+      recaptchaVerifier
     );
   } catch (e) {
     console.log(e);
@@ -92,11 +109,11 @@ export async function verifyPhoneNumber(
 export async function enrollUser(
   user: User,
   verificationCodeId: string,
-  verificationCode: string,
+  verificationCode: string
 ) {
   const phoneAuthCredential = PhoneAuthProvider.credential(
     verificationCodeId,
-    verificationCode,
+    verificationCode
   );
   const multiFactorAssertion =
     PhoneMultiFactorGenerator.assertion(phoneAuthCredential);
@@ -104,7 +121,7 @@ export async function enrollUser(
   try {
     await multiFactor(user).enroll(
       multiFactorAssertion,
-      "Personal Phone Number",
+      "Personal Phone Number"
     );
     return true;
   } catch (e) {
@@ -116,7 +133,7 @@ export async function enrollUser(
 export async function verifyUserMFA(
   error: MultiFactorError,
   recaptchaVerifier: ApplicationVerifier,
-  selectedIndex: number,
+  selectedIndex: number
 ): Promise<
   false | { verificationId: string; resolver: MultiFactorResolver } | void
 > {
@@ -135,7 +152,7 @@ export async function verifyUserMFA(
     try {
       const verificationId = await phoneAuthProvider.verifyPhoneNumber(
         phoneInfoOptions,
-        recaptchaVerifier,
+        recaptchaVerifier
       );
       return { verificationId, resolver };
     } catch (e) {
@@ -147,12 +164,12 @@ export async function verifyUserMFA(
 
 export async function verifyUserEnrolled(
   verificationMFA: { verificationId: string; resolver: MultiFactorResolver },
-  verificationCode: string,
+  verificationCode: string
 ) {
   const { verificationId, resolver } = verificationMFA;
   const credentials = PhoneAuthProvider.credential(
     verificationId,
-    verificationCode,
+    verificationCode
   );
   const multiFactorAssertion = PhoneMultiFactorGenerator.assertion(credentials);
 
@@ -172,5 +189,14 @@ export async function verifyUserEmail(user: User): Promise<boolean> {
   } catch (e) {
     console.log(e);
     return false;
+  }
+}
+export async function resetPassword(email: string): Promise<boolean> {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    return true; // Return true if email is sent successfully
+  } catch (e) {
+    console.log(e); // Log error for debugging
+    return false; // Return false if an error occurs
   }
 }

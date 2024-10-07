@@ -1,13 +1,14 @@
 import { FormEvent, useRef } from "react";
-import { At, GoogleLogo, Password } from "phosphor-react";
+import { At, GoogleLogo, Password,  GithubLogo } from "phosphor-react"; // Add GitHubLogo
 import { Link } from "react-router-dom";
 
 type Props = {
   loginWithGoogle: () => void;
+  loginWithGithub: () => void; // New prop for GitHub login
   loginWithEmailAndPassword: (email: string, password: string) => void;
 };
 
-export function Login({ loginWithGoogle, loginWithEmailAndPassword }: Props) {
+export function Login({ loginWithGoogle, loginWithGithub, loginWithEmailAndPassword }: Props) {
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
 
@@ -21,20 +22,24 @@ export function Login({ loginWithGoogle, loginWithEmailAndPassword }: Props) {
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
-      {" "}
-      {/* Flex container for centering */}
       <div className="bg-white md:w-[500px] rounded-xl p-8">
-        {" "}
-        {/* Login Form */}
         <h2 className="mt-20 mb-8 text-3xl font-bold text-center text-gray-800">
           Welcome back
         </h2>
         <button
           onClick={loginWithGoogle}
-          className="rounded-xl flex gap-x-4 mb-8 text-black h-11 w-full items-center justify-center px-6 border border-gray-500"
+          className="rounded-xl flex gap-x-4 mb-4 text-black h-11 w-full items-center justify-center px-6 border border-gray-500"
         >
           <GoogleLogo className="w-6 h-6" />
           <span className="relative text-base font-light">with Google</span>
+        </button>
+        {/* New GitHub Login Button */}
+        <button
+          onClick={loginWithGithub}
+          className="rounded-xl flex gap-x-4 mb-8 text-black h-11 w-full items-center justify-center px-6 border border-gray-500"
+        >
+          <GithubLogo className="w-6 h-6" />
+          <span className="relative text-base font-light">with GitHub</span>
         </button>
         <p className="text-center mb-8">Or</p>
         <form className="space-y-8" onSubmit={handleSubmit}>
@@ -73,6 +78,12 @@ export function Login({ loginWithGoogle, loginWithEmailAndPassword }: Props) {
             Don't have an account?{" "}
             <Link to="/sign-up" className="text-black">
               Sign up
+            </Link>
+          </p>
+          <p className="text-center text-sm text-gray-500 mt-2">
+            Can't remember your Password?{" "}
+            <Link to="/reset-password" className="text-black">
+              Reset password
             </Link>
           </p>
         </form>

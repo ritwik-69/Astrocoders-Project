@@ -4,6 +4,7 @@ import SignUpPage from "./pages/Sign-up"; // Adjust the import path as necessary
 import UserPage from "./pages/User";
 import LoginPage from "./pages/Login";
 import MFAPage from "./pages/Mfa";
+import ResetPasswordPage from "./pages/ResetPassword";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/user" element={<UserPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/mfa" element={<MFAPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
       </Routes>
     </Router>
   );

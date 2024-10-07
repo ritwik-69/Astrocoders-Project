@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Login } from "../components/Login";
 import {
   login,
+  signInWithGithub,
   signInWithGoogle,
   verifyUserMFA,
 } from "../firebase/authentication";
@@ -55,6 +56,7 @@ export default function LoginPage() {
       {!verificationId && !resolver && (
         <Login
           loginWithGoogle={loginWithGoogle}
+          loginWithGithub={signInWithGithub}
           loginWithEmailAndPassword={loginWithEmailAndPassword}
         />
       )}

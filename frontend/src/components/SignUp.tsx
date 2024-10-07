@@ -20,7 +20,7 @@ export function SignUp() {
     if (emailRef.current && passwordRef.current) {
       const response = await signUp(
         emailRef.current.value,
-        passwordRef.current.value,
+        passwordRef.current.value
       );
       if (!response) {
         notify("Something went wrong.");
@@ -29,14 +29,14 @@ export function SignUp() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white md:w-[500px] rounded-xl p-8">
         <h2 className="mt-20 mb-8 text-3xl font-bold text-center text-gray-800">
           Create an account
         </h2>
         <button
           onClick={loginWithGoogle}
-          className="rounded-xl relative flex gap-x-4 mb-8 text-black h-11 w-full items-center justify-center px-6 border border-gray-500"
+          className="rounded-xl flex gap-x-4 mb-8 text-black h-11 w-full items-center justify-center px-6 border border-gray-500"
         >
           <GoogleLogo className="w-6 h-6" />
           <span className="relative text-base font-light">with Google</span>
@@ -51,11 +51,7 @@ export function SignUp() {
                 type="email"
                 name="email"
                 placeholder="Insert your email"
-                className="focus:outline-none
-                                        block w-full rounded-xl placeholder-gray-500
-                                        bg-gray-100 pl-12 pr-4 h-12 text-gray-600 transition
-                                        duration-300 invalid:ring-2 invalid:ring-red-400
-                                        focus:ring-2 focus:ring-black"
+                className="focus:outline-none block w-full rounded-xl placeholder-gray-500 bg-gray-100 pl-12 pr-4 h-12 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-black"
               />
             </div>
           </div>
@@ -80,20 +76,19 @@ export function SignUp() {
               Sign Up
             </span>
           </button>
-          <div className="border-t border-gray-100 pt-6 text-center text-sm text-gray-500">
-            <p>
-              Can't remember your Password?
-              <Link to="/reset-password" className="text-black">
-                Reset password
-              </Link>
-            </p>
-            <p>
-              Do you have an account?{" "}
+            <p className="border-t border-gray-100 pt-6 text-center text-sm text-gray-500">
+              Already have an account?{" "}
               <Link to="/login" className="text-black">
                 Login
               </Link>
             </p>
-          </div>
+            <p className="text-center text-sm text-gray-500 mt-2">
+              Can't remember your Password?{" "}
+              <Link to="/reset-password" className="text-black">
+                Reset password
+              </Link>
+            </p>
+
         </form>
       </div>
     </div>
