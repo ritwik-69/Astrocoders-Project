@@ -38,10 +38,13 @@ const App: React.FC = () => {
           </h1>
           <p className="text-xl font-semibold leading-relaxed mb-6">
             Pushing the boundaries of astrophysical research by creating a
-            cutting-edge model to detect, classify, and visualize X-ray bursts. We’re tackling the most extreme cosmic events, from Type I and II bursts to superbursts and solar flares.
+            cutting-edge model to detect, classify, and visualize X-ray bursts.
+            We’re tackling the most extreme cosmic events, from Type I and II
+            bursts to superbursts and solar flares.
           </p>
           <p className="text-xl font-medium italic opacity-90">
-            Our mission: To unlock new insights into the universe’s most powerful phenomena.
+            Our mission: To unlock new insights into the universe’s most
+            powerful phenomena.
           </p>
         </div>
       </main>
