@@ -1,6 +1,13 @@
 import { motion } from "framer-motion";
 
-const StatCard = ({ name, icon: Icon, value, color }) => {
+interface StatCardProps {
+  name: string;
+  icon: any;
+  value: number;
+  color: string;
+}
+
+const StatCard = ({ name, icon: Icon, value, color }: StatCardProps) => {
   return (
     <motion.div
       className="bg-gray-800 bg-opacity-50 backdrop-blur-md overflow-hidden shadow-lg rounded-xl border border-gray-700"

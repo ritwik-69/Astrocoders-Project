@@ -65,7 +65,7 @@ const OrdersTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredOrders, setFilteredOrders] = useState(orderData);
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: any) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
     const filtered = orderData.filter(
