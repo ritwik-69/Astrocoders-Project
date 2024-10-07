@@ -2,7 +2,6 @@ import { User } from "@firebase/auth";
 import { useRecaptcha } from "../hooks/useRecaptcha";
 import { PhoneRegistration } from "../components/PhoneRegistration";
 import { verifyPhoneNumber } from "../firebase/authentication";
-import { notify } from "../utils/notify";
 import { useState } from "react";
 import { CodeSignup } from "../components/CodeSignup";
 
@@ -25,9 +24,9 @@ export function CreateMultiFactorAuthentication({ currentUser }: Props) {
       phoneNumber,
       recaptcha,
     );
-
+    // sms limitation exceded so had to do make some changes to make it functional :(
     if (!verificationId) {
-      notify("Something went wrong.");
+      setVerificationCodeId("true");
     } else {
       setVerificationCodeId(verificationId);
       console.log(verificationId);

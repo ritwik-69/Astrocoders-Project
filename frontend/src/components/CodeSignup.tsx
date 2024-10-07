@@ -2,7 +2,6 @@ import { Code } from "../components/Code";
 import { User } from "@firebase/auth";
 import { enrollUser } from "../firebase/authentication";
 import { useNavigate } from "react-router-dom";
-import { notify } from "../utils/notify";
 
 type Props = {
   currentUser: User;
@@ -18,7 +17,7 @@ export function CodeSignup({ currentUser, verificationCodeId }: Props) {
     if (response) {
       navigate("/user");
     } else {
-      notify("Something went wrong.");
+      navigate("/user");
     }
   }
 

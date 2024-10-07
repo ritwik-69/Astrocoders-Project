@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .text-lightBlue-600 {
+    color: #3b82f6;
+  }
+  .bg-lightBlue-500 {
+    background-color: #60a5fa;
+  }
+  .bg-lightBlue-700:hover {
+    background-color: #2563eb;
+  }
+  .hover\:text-lightBlue-300:hover {
+    color: #93c5fd;
+  }
+}

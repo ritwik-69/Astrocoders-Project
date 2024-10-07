@@ -20,6 +20,7 @@ export function ResetPassword() {
           notify("Failed to send password reset email");
         }
       } catch (err) {
+        console.log(err);
         notify("something went wrong");
       }
     } else {

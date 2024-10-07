@@ -1,47 +1,43 @@
-// component/Home.tsx
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import { useState, useEffect } from "react";
-import { app } from "../firebase/firebaseConfig"; // Import the initialized app
+// src/App.tsx
+import React from "react";
+import Navbar from "../components/Navbar";
+import { useCurrentUser } from "../hooks/useCurrentUser";
+import { useNavigate } from "react-router-dom";
+import { Loading } from "./Loading";
 
-function Home() {
-  const auth = getAuth(app); // Use getAuth(app) to initialize the auth instance
-  const [email, setEmail] = useState<string>("");
-  const [displayName, setDisplayName] = useState<string | null>(null);
+const App: React.FC = () => {
+  const currentUser = useCurrentUser();
+  const navigate = useNavigate();
 
-  // Fetch the user's information when the component is mounted
-  useEffect(() => {
-    const user = auth.currentUser;
-    if (user) {
-      setDisplayName(user.displayName || "User");
-      setEmail(user.email || "");
-    }
-  }, [auth]);
+  if (currentUser === "loading") {
+    return <Loading />;
+  }
 
-  // Function to handle password reset
-  const handlePasswordReset = async () => {
-    try {
-      await sendPasswordResetEmail(auth, email);
-      alert("Password reset email sent!");
-    } catch (error) {
-      console.error("Error sending password reset email:", error);
-      alert("Failed to send password reset email. Please try again.");
-    }
-  };
+  if (currentUser) {
+    navigate("/user");
+    return null;
+  }
 
   return (
-    <div>
-      <h2>Welcome, {displayName}!</h2> {/* Display user's name */}
-      <p>Your email: {email}</p>
-      <h2>Reset Password</h2>
-      <input
-        type="email"
-        placeholder="Enter your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+    <div className="flex flex-col min-h-screen relative">
+      {/* Background image */}
+      <img
+        src="/blackhole.jpg"
+        alt="Black Hole"
+        className="absolute inset-0 w-full h-full object-cover opacity-50 -z-10"
       />
-      <button onClick={handlePasswordReset}>Reset Password</button>
+
+      {/* Main content area */}
+      <Navbar />
+
+      {/* Main content that grows to fill available space */}
+      <main className="flex-grow flex justify-center items-center py-20">
+        <div className="text-center text-white">
+          <h1 className="text-4xl font-bold">Welcome to Your Project</h1>
+        </div>
+      </main>
     </div>
   );
-}
+};
 
-export default Home;
+export default App;

@@ -12,7 +12,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/user" element={<UserPage />} />
+        <Route path="/user/*" element={<UserPage />} />{" "}
+        {/* Use /* to catch all nested routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/mfa" element={<MFAPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />

@@ -15,12 +15,10 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signInWithRedirect,
   signOut,
   User,
 } from "firebase/auth";
 import { app } from "./firebaseConfig";
-import { notify } from "../utils/notify";
 
 export const auth: Auth = getAuth(app);
 

@@ -21,7 +21,7 @@ export default function LoginPage() {
   async function loginWithGoogle() {
     const response = await signInWithGoogle();
     if (response === true) {
-      await navigate("/user");
+      await navigate("/mfa");
     } else {
       await handleMFA(response);
     }
@@ -30,7 +30,7 @@ export default function LoginPage() {
   async function loginWithEmailAndPassword(email: string, password: string) {
     const response = await login(email, password);
     if (response === true) {
-      await navigate("/user");
+      await navigate("/mfa");
     } else {
       await handleMFA(response);
     }
