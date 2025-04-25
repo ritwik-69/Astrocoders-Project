@@ -22,7 +22,7 @@ const App: React.FC = () => {
     <div className="flex flex-col min-h-screen relative">
       {/* Background image */}
       <img
-        src="/blackhole.jpg"
+        src="/geotech.jpeg"
         alt="Black Hole"
         className="absolute inset-0 w-full h-full object-cover opacity-50 -z-10"
       />
@@ -34,17 +34,23 @@ const App: React.FC = () => {
       <main className="flex-grow flex justify-center items-center py-20">
         <div className="text-center text-Black max-w-2xl px-4">
           <h1 className="text-4xl font-black mb-8 uppercase tracking-wide">
-            X-ray Burst Detection & Classification
+            X-ray Fluorescence (XRF) analysis
           </h1>
           <p className="text-xl font-semibold leading-relaxed mb-6">
-            Pushing the boundaries of astrophysical research by creating a
-            cutting-edge model to detect, classify, and visualize X-ray bursts.
-            We’re tackling the most extreme cosmic events, from Type I and II
-            bursts to superbursts and solar flares.
+            X-ray Fluorescence (XRF) analysis is a widely used technique for
+            elemental identification and quantification in geological studies.
+            It operates by bombarding a sample with high-energy X-rays, which
+            causes the atoms in the material to emit secondary (fluorescent)
+            X-rays. These emitted X-rays are characteristic of the elements in
+            the sample, allowing for a precise elemental breakdown
           </p>
-          <p className="text-xl font-medium italic opacity-90">
-            Our mission: To unlock new insights into the universe’s most
-            powerful phenomena.
+          <p className="text-xl font-medium italic opacity-90 mt-10">
+            <button
+              type="button"
+              className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+            >
+              Upload XRF Data file
+            </button>
           </p>
         </div>
       </main>

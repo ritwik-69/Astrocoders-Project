@@ -13,11 +13,12 @@ import {
 
 const COLORS = ["#6366F1", "#8B5CF6", "#EC4899", "#10B981", "#F59E0B"];
 
+// Updated data: Total XRF intensity (in cps) by geological site
 const SALES_CHANNEL_DATA = [
-  { name: "Website", value: 45600 },
-  { name: "Mobile App", value: 38200 },
-  { name: "Marketplace", value: 29800 },
-  { name: "Social Media", value: 18700 },
+  { name: "Quarry A", value: 5400 },
+  { name: "Ridge B", value: 4900 },
+  { name: "Pit C", value: 4300 },
+  { name: "Valley D", value: 3600 },
 ];
 
 const SalesChannelChart = () => {
@@ -29,7 +30,7 @@ const SalesChannelChart = () => {
       transition={{ delay: 0.4 }}
     >
       <h2 className="text-lg font-medium mb-4 text-gray-100">
-        Sales by Channel
+        XRF Readings by Sample Site
       </h2>
 
       <div className="h-80">
@@ -60,4 +61,5 @@ const SalesChannelChart = () => {
     </motion.div>
   );
 };
+
 export default SalesChannelChart;

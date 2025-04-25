@@ -10,17 +10,18 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const dailyOrdersData = [
-  { date: "07/01", orders: 45 },
-  { date: "07/02", orders: 52 },
-  { date: "07/03", orders: 49 },
-  { date: "07/04", orders: 60 },
-  { date: "07/05", orders: 55 },
-  { date: "07/06", orders: 58 },
-  { date: "07/07", orders: 62 },
+// Sample XRF data: Elemental concentrations (in %)
+const xrfData = [
+  { sample: "Sample 1", Fe: 7.2, Ca: 9.5, Mg: 5.6 },
+  { sample: "Sample 2", Fe: 6.9, Ca: 9.8, Mg: 5.3 },
+  { sample: "Sample 3", Fe: 7.5, Ca: 9.3, Mg: 5.9 },
+  { sample: "Sample 4", Fe: 7.1, Ca: 9.7, Mg: 5.7 },
+  { sample: "Sample 5", Fe: 7.3, Ca: 9.4, Mg: 5.8 },
+  { sample: "Sample 6", Fe: 7.0, Ca: 9.6, Mg: 5.5 },
+  { sample: "Sample 7", Fe: 7.4, Ca: 9.2, Mg: 5.8 },
 ];
 
-const DailyOrders = () => {
+const ElementConcentration = () => {
   return (
     <motion.div
       className="bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700"
@@ -28,13 +29,15 @@ const DailyOrders = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
     >
-      <h2 className="text-xl font-semibold text-gray-100 mb-4">Daily Orders</h2>
+      <h2 className="text-xl font-semibold text-gray-100 mb-4">
+        Elemental Concentration (XRF)
+      </h2>
 
       <div style={{ width: "100%", height: 300 }}>
         <ResponsiveContainer>
-          <LineChart data={dailyOrdersData}>
+          <LineChart data={xrfData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-            <XAxis dataKey="date" stroke="#9CA3AF" />
+            <XAxis dataKey="sample" stroke="#9CA3AF" />
             <YAxis stroke="#9CA3AF" />
             <Tooltip
               contentStyle={{
@@ -46,9 +49,24 @@ const DailyOrders = () => {
             <Legend />
             <Line
               type="monotone"
-              dataKey="orders"
-              stroke="#8B5CF6"
+              dataKey="Fe"
+              stroke="#FF5733"
               strokeWidth={2}
+              name="Iron (Fe)"
+            />
+            <Line
+              type="monotone"
+              dataKey="Ca"
+              stroke="#33FF57"
+              strokeWidth={2}
+              name="Calcium (Ca)"
+            />
+            <Line
+              type="monotone"
+              dataKey="Mg"
+              stroke="#3357FF"
+              strokeWidth={2}
+              name="Magnesium (Mg)"
             />
           </LineChart>
         </ResponsiveContainer>
@@ -56,4 +74,5 @@ const DailyOrders = () => {
     </motion.div>
   );
 };
-export default DailyOrders;
+
+export default ElementConcentration;

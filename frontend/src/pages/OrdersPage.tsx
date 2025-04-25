@@ -8,16 +8,16 @@ import OrderDistribution from "../components/orders/OrderDistribution";
 import OrdersTable from "../components/orders/OrdersTable";
 
 const orderStats = {
-  totalOrders: "1,234",
-  pendingOrders: "56",
-  completedOrders: "1,178",
-  totalRevenue: "$98,765",
+  totalOrders: "1,234", // Total samples analyzed
+  pendingOrders: "56", // Pending samples
+  completedOrders: "1,178", // Completed analyses
+  totalRevenue: "478.6 hrs", // Total runtime
 };
 
 const OrdersPage = () => {
   return (
     <div className="flex-1 relative z-10 overflow-auto">
-      <Header title={"History"} />
+      <Header title={"XRF Analysis History"} />
 
       <main className="max-w-7xl mx-auto py-6 px-4 lg:px-8">
         <motion.div
@@ -27,25 +27,25 @@ const OrdersPage = () => {
           transition={{ duration: 1 }}
         >
           <StatCard
-            name="Total computations"
+            name="Total Samples Analyzed"
             icon={ShoppingBag}
             value={orderStats.totalOrders}
             color="#6366F1"
           />
           <StatCard
-            name="Pending Computations"
+            name="Pending Samples"
             icon={Clock}
             value={orderStats.pendingOrders}
             color="#F59E0B"
           />
           <StatCard
-            name="Completed Computations"
+            name="Completed Analyses"
             icon={CheckCircle}
             value={orderStats.completedOrders}
             color="#10B981"
           />
           <StatCard
-            name="Total Revenue"
+            name="Total Runtime"
             icon={DollarSign}
             value={orderStats.totalRevenue}
             color="#EF4444"
@@ -62,4 +62,5 @@ const OrdersPage = () => {
     </div>
   );
 };
+
 export default OrdersPage;
