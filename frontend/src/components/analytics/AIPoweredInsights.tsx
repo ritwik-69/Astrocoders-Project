@@ -1,34 +1,34 @@
 import { motion } from "framer-motion";
-import { TrendingUp, Users, ShoppingBag, DollarSign } from "lucide-react";
+import { BarChart, Layers, FileText, Activity } from "lucide-react";
 
-const INSIGHTS = [
+const XRF_INSIGHTS = [
   {
-    icon: TrendingUp,
+    icon: BarChart,
     color: "text-green-500",
     insight:
-      "Revenue is up 15% compared to last month, driven primarily by a successful email campaign.",
+      "Iron (Fe) concentration has increased by 10% in Sample 2 compared to Sample 1, suggesting higher iron ore content.",
   },
   {
-    icon: Users,
+    icon: Layers,
     color: "text-blue-500",
     insight:
-      "Customer retention has improved by 8% following the launch of the new loyalty program.",
+      "Silicon (Si) levels in Sample 1 are significantly higher than in Sample 2, indicating a difference in mineral composition.",
   },
   {
-    icon: ShoppingBag,
+    icon: FileText,
     color: "text-purple-500",
     insight:
-      'Product category "Electronics" shows the highest growth potential based on recent market trends.',
+      "Calcium (Ca) shows a steady increase across all samples, potentially indicating an increase in carbonate minerals.",
   },
   {
-    icon: DollarSign,
+    icon: Activity,
     color: "text-yellow-500",
     insight:
-      "Optimizing pricing strategy could potentially increase overall profit margins by 5-7%.",
+      "Magnesium (Mg) concentrations are lower in Sample 2, suggesting a difference in rock weathering processes.",
   },
 ];
 
-const AIPoweredInsights = () => {
+const XRFAnalysisInsights = () => {
   return (
     <motion.div
       className="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg shadow-lg rounded-xl p-6 border border-gray-700"
@@ -37,10 +37,10 @@ const AIPoweredInsights = () => {
       transition={{ delay: 1.0 }}
     >
       <h2 className="text-xl font-semibold text-gray-100 mb-4">
-        AI-Powered Insights
+        XRF Analysis Insights
       </h2>
       <div className="space-y-4">
-        {INSIGHTS.map((item, index) => (
+        {XRF_INSIGHTS.map((item, index) => (
           <div key={index} className="flex items-center space-x-3">
             <div className={`p-2 rounded-full ${item.color} bg-opacity-20`}>
               <item.icon className={`size-6 ${item.color}`} />
@@ -52,4 +52,5 @@ const AIPoweredInsights = () => {
     </motion.div>
   );
 };
-export default AIPoweredInsights;
+
+export default XRFAnalysisInsights;

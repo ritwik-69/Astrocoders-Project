@@ -8,14 +8,16 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const channelData = [
-  { name: "Organic Search", value: 4000 },
-  { name: "Paid Search", value: 3000 },
-  { name: "Direct", value: 2000 },
-  { name: "Social Media", value: 2780 },
-  { name: "Referral", value: 1890 },
-  { name: "Email", value: 2390 },
+// Sample XRF elemental composition data (in percentage)
+const xrfData = [
+  { name: "Iron (Fe)", value: 32 },
+  { name: "Silicon (Si)", value: 25 },
+  { name: "Aluminum (Al)", value: 15 },
+  { name: "Calcium (Ca)", value: 10 },
+  { name: "Magnesium (Mg)", value: 8 },
+  { name: "Others", value: 10 },
 ];
+
 const COLORS = [
   "#8884d8",
   "#82ca9d",
@@ -25,7 +27,7 @@ const COLORS = [
   "#00C49F",
 ];
 
-const ChannelPerformance = () => {
+const XRFAnalysis = () => {
   return (
     <motion.div
       className="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg shadow-lg rounded-xl p-6 border border-gray-700"
@@ -34,23 +36,23 @@ const ChannelPerformance = () => {
       transition={{ delay: 0.3 }}
     >
       <h2 className="text-xl font-semibold text-gray-100 mb-4">
-        Channel Performance
+        XRF Elemental Composition
       </h2>
       <div style={{ width: "100%", height: 300 }}>
         <ResponsiveContainer>
           <PieChart>
             <Pie
-              data={channelData}
+              data={xrfData}
               cx="50%"
               cy="50%"
               outerRadius={80}
               fill="#8884d8"
               dataKey="value"
               label={({ name, percent }) =>
-                `${name} ${(percent * 100).toFixed(0)}%`
+                `${name}: ${(percent * 100).toFixed(0)}%`
               }
             >
-              {channelData.map((_, index) => (
+              {xrfData.map((_, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}
@@ -71,4 +73,5 @@ const ChannelPerformance = () => {
     </motion.div>
   );
 };
-export default ChannelPerformance;
+
+export default XRFAnalysis;

@@ -1,29 +1,48 @@
 import { motion } from "framer-motion";
 import {
-  DollarSign,
-  Users,
-  ShoppingBag,
-  Eye,
+  FlaskConical,
+  Layers,
+  Flame,
+  FileBarChart2,
   ArrowDownRight,
   ArrowUpRight,
 } from "lucide-react";
 
-const overviewData = [
-  { name: "Revenue", value: "$1,234,567", change: 12.5, icon: DollarSign },
-  { name: "Users", value: "45,678", change: 8.3, icon: Users },
-  { name: "Orders", value: "9,876", change: -3.2, icon: ShoppingBag },
-  { name: "Page Views", value: "1,234,567", change: 15.7, icon: Eye },
+const xrfData = [
+  {
+    name: "Fe₂O₃ Content",
+    value: "68.4%",
+    change: 1.2,
+    icon: FlaskConical,
+  },
+  {
+    name: "SiO₂ Content",
+    value: "3.7%",
+    change: -0.5,
+    icon: Layers,
+  },
+  {
+    name: "LOI (Loss on Ignition)",
+    value: "1.9%",
+    change: 0.3,
+    icon: Flame,
+  },
+  {
+    name: "Samples Analyzed",
+    value: "120",
+    change: 10.0,
+    icon: FileBarChart2,
+  },
 ];
 
 const OverviewCards = () => {
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8">
-      {overviewData.map((item, index) => (
+      {xrfData.map((item, index) => (
         <motion.div
           key={item.name}
           className="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg shadow-lg
-            rounded-xl p-6 border border-gray-700
-          "
+            rounded-xl p-6 border border-gray-700"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 }}
@@ -38,18 +57,22 @@ const OverviewCards = () => {
 
             <div
               className={`
-              p-3 rounded-full bg-opacity-20 ${item.change >= 0 ? "bg-green-500" : "bg-red-500"}
+                p-3 rounded-full bg-opacity-20 ${
+                  item.change >= 0 ? "bg-green-500" : "bg-red-500"
+                }
               `}
             >
               <item.icon
-                className={`size-6  ${item.change >= 0 ? "text-green-500" : "text-red-500"}`}
+                className={`size-6 ${
+                  item.change >= 0 ? "text-green-500" : "text-red-500"
+                }`}
               />
             </div>
           </div>
           <div
-            className={`
-              mt-4 flex items-center ${item.change >= 0 ? "text-green-500" : "text-red-500"}
-            `}
+            className={`mt-4 flex items-center ${
+              item.change >= 0 ? "text-green-500" : "text-red-500"
+            }`}
           >
             {item.change >= 0 ? (
               <ArrowUpRight size="20" />
@@ -59,11 +82,12 @@ const OverviewCards = () => {
             <span className="ml-1 text-sm font-medium">
               {Math.abs(item.change)}%
             </span>
-            <span className="ml-2 text-sm text-gray-400">vs last period</span>
+            <span className="ml-2 text-sm text-gray-400">vs last batch</span>
           </div>
         </motion.div>
       ))}
     </div>
   );
 };
+
 export default OverviewCards;

@@ -11,11 +11,11 @@ import {
 import { motion } from "framer-motion";
 
 const productPerformanceData = [
-  { name: "Product A", sales: 4000, revenue: 2400, profit: 2400 },
-  { name: "Product B", sales: 3000, revenue: 1398, profit: 2210 },
-  { name: "Product C", sales: 2000, revenue: 9800, profit: 2290 },
-  { name: "Product D", sales: 2780, revenue: 3908, profit: 2000 },
-  { name: "Product E", sales: 1890, revenue: 4800, profit: 2181 },
+  { name: "Sample A", "Al₂O₃": 17.5, MgO: 5.2, "SiO₂": 45.3 },
+  { name: "Sample B", "Al₂O₃": 14.8, MgO: 6.1, "SiO₂": 50.2 },
+  { name: "Sample C", "Al₂O₃": 19.1, MgO: 4.8, "SiO₂": 47.6 },
+  { name: "Sample D", "Al₂O₃": 16.7, MgO: 5.9, "SiO₂": 48.0 },
+  { name: "Sample E", "Al₂O₃": 15.3, MgO: 5.5, "SiO₂": 49.1 },
 ];
 
 const ProductPerformance = () => {
@@ -27,7 +27,7 @@ const ProductPerformance = () => {
       transition={{ delay: 0.4 }}
     >
       <h2 className="text-xl font-semibold text-gray-100 mb-4">
-        Product Performance
+        Oxide Concentration
       </h2>
       <div style={{ width: "100%", height: 300 }}>
         <ResponsiveContainer>
@@ -43,9 +43,9 @@ const ProductPerformance = () => {
               itemStyle={{ color: "#E5E7EB" }}
             />
             <Legend />
-            <Bar dataKey="sales" fill="#8B5CF6" />
-            <Bar dataKey="revenue" fill="#10B981" />
-            <Bar dataKey="profit" fill="#F59E0B" />
+            <Bar dataKey="Al₂O₃" fill="#8B5CF6" />
+            <Bar dataKey="MgO" fill="#10B981" />
+            <Bar dataKey="SiO₂" fill="#F59E0B" />
           </BarChart>
         </ResponsiveContainer>
       </div>

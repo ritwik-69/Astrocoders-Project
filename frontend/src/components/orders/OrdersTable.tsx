@@ -88,7 +88,7 @@ const XRFDataTable = () => {
     const filtered = xrfData.filter(
       (sample) =>
         sample.id.toLowerCase().includes(term) ||
-        sample.sample.toLowerCase().includes(term)
+        sample.sample.toLowerCase().includes(term),
     );
     setFilteredSamples(filtered);
   };
